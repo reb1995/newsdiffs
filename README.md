@@ -9,7 +9,10 @@ Authors: Eric Price (ecprice@mit.edu), Greg Price (gnprice@gmail.com),
  and Jennifer 8. Lee (jenny@jennifer8lee.com)
 
 This is free software under the MIT/Expat license; see LICENSE.
-The project's source code lives at http://github.com/ecprice/newsdiffs .
+The project's original source code lives at http://github.com/ecprice/newsdiffs .
+
+Forked 12/11/2017.
+This fork's source code lives at https://github.com/reb1995/newsdiffs .
 
 
 Requirements
