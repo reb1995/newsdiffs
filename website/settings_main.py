@@ -1,19 +1,18 @@
 # Django settings for the newsdiffs project.
 
 ALLOWED_HOSTS = ['.newsdiffs.org', '.newsdiffs.org.',
-                 'newsdiffs.scripts.mit.edu', 'localhost', '127.0.0.1']
+                 'newsdiffs.scripts.mit.edu', 'localhost', '127.0.0.1', 'newsdiffs.rebserver.duckdns.org', '10.8.20.140']
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-     ('Eric Price', 'ecprice@mit.edu'),
-     ('Jennifer 8. Lee', 'jenny8lee@gmail.com'),
-     ('Gregory Price', 'price@mit.edu'),
+
+     ('Ryan Brown', 'ryan@rebserver.duckdns.org'),
 )
 
 MANAGERS = ADMINS
-SERVER_EMAIL = "newsdiffs@mit.edu"
+SERVER_EMAIL = "newsdiffs@rebserver.duckdns.org"
 
 for line in open('/mit/newsdiffs/.my.cnf').read().split():
     if line.startswith('password='):
