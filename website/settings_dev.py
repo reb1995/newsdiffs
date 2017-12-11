@@ -6,9 +6,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-     ('Eric Price', 'ecprice@mit.edu'),
-     ('Jennifer 8. Lee', 'jenny8lee@gmail.com'),
-     ('Gregory Price', 'price@mit.edu'),
+     ('Ryan Brown', 'ryan@rebserver.duckdns.org'),
 )
 
 MANAGERS = ADMINS
