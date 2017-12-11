@@ -11,8 +11,10 @@ Authors: Eric Price (ecprice@mit.edu), Greg Price (gnprice@gmail.com),
 This is free software under the MIT/Expat license; see LICENSE.
 The project's original source code lives at http://github.com/ecprice/newsdiffs .
 
+
 Forked 12/11/2017.
-This fork's source code lives at https://github.com/reb1995/newsdiffs .
+
+This fork's source code lives at https://github.com/reb1995/newsdiffs.
 
 
 Requirements
@@ -23,50 +25,64 @@ You need to have installed on your local machine
 * Python 2.6 or later
 * Django and other Python libraries
 
-On a Debian- or Ubuntu-based system, it may suffice (untested) to run
-  $ sudo apt-get install git-core python-django python-django-south python-simplejson
+On a Debian- or Ubuntu-based system, it may suffice (minimally tested) to run
 
-On Mac OS, the easiest way may be to install pip:
+      $ sudo apt-get install git-core python-django python-django-south python-simplejson python-bs4 python-beautifulsoup python-pip
+      
+      $ sudo pip install python-dateutil
+
+On Mac OS (not tested), the easiest way may be to install pip:
   http://www.pip-installer.org/en/latest/installing.html
 and then
-  $ pip install Django
+  
+      $ pip install Django beautifulsoup4 beautifulsoup html5lib
+      
+
+Note that we need two versions of BeautifulSoup, both 3.2 and 4.0;
+some websites are parsed correctly in only one version.      
 
 
 Initial setup
 -------------
 
-  $ python website/manage.py syncdb && python website/manage.py migrate
-  $ mkdir articles
+If you have not yet cloned this repo
+
+      $ git clone https://github.com/reb1995/newsdiffs && cd newsdiffs
+
+Initial setup
+
+      $ python website/manage.py syncdb && python website/manage.py migrate
+      
+If you have errors running the above command, downgrade Gjango to version 1.6
+
+      $ sudo pip install -U "Django<1.7"
+      
+After that, make a directory for the articles      
+      
+      $ mkdir articles
 
 
 Running NewsDiffs Locally
 -------------------------
 
 Do the initial setup above.  Then to start the webserver for testing:
-  $ python website/manage.py runserver
+      
+      $ python website/manage.py runserver
 
-and visit http://localhost:8000/
+and visit 
+
+      http://localhost:8000/
+
 
 
 Running the scraper
 -------------------
 
-Do the initial setup above.  You will also need additional Python
-libraries; on a Debian- or Ubuntu-based system, it may suffice
-(untested) to run
-  $ sudo apt-get install python-bs4 python-beautifulsoup
+Use the below command to run the scraper.
 
-on a Mac, you will want something like
 
- $ pip install beautifulsoup4
- $ pip install beautifulsoup
- $ pip install html5lib
+      $ python website/manage.py scraper
 
-Note that we need two versions of BeautifulSoup, both 3.2 and 4.0;
-some websites are parsed correctly in only one version.
-
-Then run
-  $ python website/manage.py scraper
 
 This will populate the articles repository with a list of current news
 articles.  This is a snapshot at a single time, so the website will
@@ -81,9 +97,11 @@ is cumulative).
 
 To run the scraper every hour, run something like:
 
- $ while true; do python website/manage.py scraper; sleep 60m; done
+      $ while true; do python website/manage.py scraper; sleep 60m; done
 
-or make a cron job.
+or make a cron job. This sample cron job runs every hour.
+
+      0 * * * * cd REPOLOCATION && python website/manage.py scraper
 
 Adding new sites to the scraper
 -------------------------------
@@ -96,13 +114,13 @@ parsers/__init__.py .  You need to
       the other parsers in that directory.  You can test the parser
       with by running, e.g.,
 
-$ python parsers/test_parser.py bbc.BBCParser
+      $ python parsers/test_parser.py bbc.BBCParser
 
-      which will output a list of URLs to track, and
+which will output a list of URLs to track, and
 
-$ python parsers/test_parser.py bbc.BBCParser http://www.bbc.co.uk/news/uk-21649494
+      $ python parsers/test_parser.py bbc.BBCParser http://www.bbc.co.uk/news/uk-21649494
 
-      which will output the text that NewsDiffs would store.
+which will output the text that NewsDiffs would store.
 
   (2) Add the parser to 'parsers' in parsers/__init__.py
 
